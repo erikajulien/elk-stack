@@ -66,7 +66,7 @@ The [Install Elk](Ansible/install-elk.yml) playbook implements the following tas
 
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
 
-![Docker ps Output Screenshot](Images/docker_ps_output.png)
+![Docker ps Output Screenshot](Images/docker-ps-screenshot.png)
 
 ### Target Machines & Beats
 This ELK server is configured to monitor the following machines:
@@ -91,5 +91,6 @@ In order to use the playbook, you will need to have an Ansible control node alre
 SSH into the control node and follow the steps below:
 - Copy the [install-elk.yml](Ansible/install-elk.yml) file to `/etc/ansible`
 - Update the ansible `/etc/ansible/hosts` file to include ELK server private IP under a new parameter `[elk]`. It should look like the following:
-![Ansible hosts Screenshot](Images/docker_ps_output.png)
+![Ansible hosts Screenshot](Images/ansible-hosts-screenshot.png)
 - Run the playbook with `ansible-playbook /etc/ansible/ansible-playbook install-elk.yml`, and navigate to `http://<YOUR.ELK.VM.External.IP>:5601/app/kibana` to check that the installation worked as expected.
+
