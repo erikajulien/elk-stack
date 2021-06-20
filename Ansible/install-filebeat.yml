@@ -1,0 +1,28 @@
+---
+- name: Install and launch filebeat
+  hosts: elk
+  remote_user: azadmin
+  become: true
+  tasks:
+
+    - name: Download filebeat .deb package
+      command: curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.4.0-amd64.deb
+
+    - name: Install dpkg
+      command: dpkg -i filebeat-7.4.0-amd64.deb
+
+    - name: Copy config file to filebeat.yml
+      ansible.builtin.copy:
+        src: /etc/ansible/filebeat-config.yml
+        dest: /etc/filebeat/filebeat.yml
+
+    - name: Enable system, setup, start
+      shell: |
+        filebeat modules enable system
+        filebeat setup
+        service filebeat start
+
+    - name: Make sure filebeat is running
+      ansible.builtin.systemd:
+        state: started
+        name: filebeat
